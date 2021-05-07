@@ -26,7 +26,7 @@ Partial Class Form1
         Me.NUDRed2 = New System.Windows.Forms.NumericUpDown()
         Me.NUDRed3 = New System.Windows.Forms.NumericUpDown()
         Me.NUDRed4 = New System.Windows.Forms.NumericUpDown()
-        Me.Label1 = New System.Windows.Forms.Label()
+        Me.LblDireccionIP = New System.Windows.Forms.Label()
         Me.RBClaseA = New System.Windows.Forms.RadioButton()
         Me.RBClaseC = New System.Windows.Forms.RadioButton()
         Me.RBClaseB = New System.Windows.Forms.RadioButton()
@@ -37,24 +37,34 @@ Partial Class Form1
         Me.CBMascara4 = New System.Windows.Forms.ComboBox()
         Me.NUDcicd = New System.Windows.Forms.NumericUpDown()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
+        Me.LblMascaraRed = New System.Windows.Forms.Label()
         Me.GBEleccionMascara = New System.Windows.Forms.GroupBox()
         Me.RBMascara = New System.Windows.Forms.RadioButton()
         Me.RBcicd = New System.Windows.Forms.RadioButton()
         Me.BtnCalcular = New System.Windows.Forms.Button()
         Me.BtnLimpiar = New System.Windows.Forms.Button()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.Label9 = New System.Windows.Forms.Label()
+        Me.LblDirRed = New System.Windows.Forms.Label()
+        Me.LblDirBroadcast = New System.Windows.Forms.Label()
+        Me.LblDirUltima = New System.Windows.Forms.Label()
+        Me.LblDirPrimera = New System.Windows.Forms.Label()
+        Me.LblNuHosts = New System.Windows.Forms.Label()
+        Me.LblNuDir = New System.Windows.Forms.Label()
         Me.TBRed = New System.Windows.Forms.TextBox()
         Me.TBBroadcast = New System.Windows.Forms.TextBox()
         Me.TBDireccionUltima = New System.Windows.Forms.TextBox()
         Me.TBDireccionPrimera = New System.Windows.Forms.TextBox()
         Me.TBCantidadDirecciones = New System.Windows.Forms.TextBox()
         Me.TBNumeroEquipos = New System.Windows.Forms.TextBox()
+        Me.LblMascaraSubred = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.NUDCICDSub = New System.Windows.Forms.NumericUpDown()
+        Me.CBMascaraSub4 = New System.Windows.Forms.ComboBox()
+        Me.CBMascaraSub3 = New System.Windows.Forms.ComboBox()
+        Me.CBMascaraSub2 = New System.Windows.Forms.ComboBox()
+        Me.CBMascaraSub1 = New System.Windows.Forms.ComboBox()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.RBMascaraSub = New System.Windows.Forms.RadioButton()
+        Me.RBCICDSub = New System.Windows.Forms.RadioButton()
         CType(Me.NUDRed1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NUDRed2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NUDRed3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -62,6 +72,8 @@ Partial Class Form1
         Me.GBClaseRed.SuspendLayout()
         CType(Me.NUDcicd, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GBEleccionMascara.SuspendLayout()
+        CType(Me.NUDCICDSub, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'NUDRed1
@@ -100,14 +112,14 @@ Partial Class Form1
         Me.NUDRed4.Size = New System.Drawing.Size(66, 27)
         Me.NUDRed4.TabIndex = 3
         '
-        'Label1
+        'LblDireccionIP
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(54, 41)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(95, 20)
-        Me.Label1.TabIndex = 4
-        Me.Label1.Text = "Dirección IP :"
+        Me.LblDireccionIP.AutoSize = True
+        Me.LblDireccionIP.Location = New System.Drawing.Point(54, 41)
+        Me.LblDireccionIP.Name = "LblDireccionIP"
+        Me.LblDireccionIP.Size = New System.Drawing.Size(95, 20)
+        Me.LblDireccionIP.TabIndex = 4
+        Me.LblDireccionIP.Text = "Dirección IP :"
         '
         'RBClaseA
         '
@@ -212,14 +224,14 @@ Partial Class Form1
         Me.Label2.TabIndex = 14
         Me.Label2.Text = "CICD :"
         '
-        'Label3
+        'LblMascaraRed
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(37, 106)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(114, 20)
-        Me.Label3.TabIndex = 15
-        Me.Label3.Text = "Mascara de red:"
+        Me.LblMascaraRed.AutoSize = True
+        Me.LblMascaraRed.Location = New System.Drawing.Point(37, 106)
+        Me.LblMascaraRed.Name = "LblMascaraRed"
+        Me.LblMascaraRed.Size = New System.Drawing.Size(114, 20)
+        Me.LblMascaraRed.TabIndex = 15
+        Me.LblMascaraRed.Text = "Mascara de red:"
         '
         'GBEleccionMascara
         '
@@ -259,7 +271,7 @@ Partial Class Form1
         Me.BtnCalcular.BackColor = System.Drawing.Color.DarkTurquoise
         Me.BtnCalcular.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.BtnCalcular.Font = New System.Drawing.Font("SERomanc", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
-        Me.BtnCalcular.Location = New System.Drawing.Point(434, 157)
+        Me.BtnCalcular.Location = New System.Drawing.Point(434, 234)
         Me.BtnCalcular.Name = "BtnCalcular"
         Me.BtnCalcular.Size = New System.Drawing.Size(388, 120)
         Me.BtnCalcular.TabIndex = 17
@@ -272,71 +284,71 @@ Partial Class Form1
         Me.BtnLimpiar.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.BtnLimpiar.Font = New System.Drawing.Font("SERomanc", 13.8!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point)
         Me.BtnLimpiar.ForeColor = System.Drawing.Color.Khaki
-        Me.BtnLimpiar.Location = New System.Drawing.Point(28, 191)
+        Me.BtnLimpiar.Location = New System.Drawing.Point(28, 268)
         Me.BtnLimpiar.Name = "BtnLimpiar"
         Me.BtnLimpiar.Size = New System.Drawing.Size(388, 53)
         Me.BtnLimpiar.TabIndex = 18
         Me.BtnLimpiar.Text = "Limpiar datos"
         Me.BtnLimpiar.UseVisualStyleBackColor = False
         '
-        'Label4
+        'LblDirRed
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(84, 299)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(101, 20)
-        Me.Label4.TabIndex = 19
-        Me.Label4.Text = "Dirección red:"
+        Me.LblDirRed.AutoSize = True
+        Me.LblDirRed.Location = New System.Drawing.Point(84, 376)
+        Me.LblDirRed.Name = "LblDirRed"
+        Me.LblDirRed.Size = New System.Drawing.Size(101, 20)
+        Me.LblDirRed.TabIndex = 19
+        Me.LblDirRed.Text = "Dirección red:"
         '
-        'Label5
+        'LblDirBroadcast
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(40, 347)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(145, 20)
-        Me.Label5.TabIndex = 20
-        Me.Label5.Text = "Dirección broadcast:"
+        Me.LblDirBroadcast.AutoSize = True
+        Me.LblDirBroadcast.Location = New System.Drawing.Point(40, 424)
+        Me.LblDirBroadcast.Name = "LblDirBroadcast"
+        Me.LblDirBroadcast.Size = New System.Drawing.Size(145, 20)
+        Me.LblDirBroadcast.TabIndex = 20
+        Me.LblDirBroadcast.Text = "Dirección broadcast:"
         '
-        'Label6
+        'LblDirUltima
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(334, 347)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(121, 20)
-        Me.Label6.TabIndex = 21
-        Me.Label6.Text = "Dirección última:"
+        Me.LblDirUltima.AutoSize = True
+        Me.LblDirUltima.Location = New System.Drawing.Point(334, 424)
+        Me.LblDirUltima.Name = "LblDirUltima"
+        Me.LblDirUltima.Size = New System.Drawing.Size(121, 20)
+        Me.LblDirUltima.TabIndex = 21
+        Me.LblDirUltima.Text = "Dirección última:"
         '
-        'Label7
+        'LblDirPrimera
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(324, 299)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(131, 20)
-        Me.Label7.TabIndex = 22
-        Me.Label7.Text = "Dirección primera:"
+        Me.LblDirPrimera.AutoSize = True
+        Me.LblDirPrimera.Location = New System.Drawing.Point(324, 376)
+        Me.LblDirPrimera.Name = "LblDirPrimera"
+        Me.LblDirPrimera.Size = New System.Drawing.Size(131, 20)
+        Me.LblDirPrimera.TabIndex = 22
+        Me.LblDirPrimera.Text = "Dirección primera:"
         '
-        'Label8
+        'LblNuHosts
         '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(311, 396)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(144, 20)
-        Me.Label8.TabIndex = 23
-        Me.Label8.Text = "Número de equipos:"
+        Me.LblNuHosts.AutoSize = True
+        Me.LblNuHosts.Location = New System.Drawing.Point(311, 473)
+        Me.LblNuHosts.Name = "LblNuHosts"
+        Me.LblNuHosts.Size = New System.Drawing.Size(144, 20)
+        Me.LblNuHosts.TabIndex = 23
+        Me.LblNuHosts.Text = "Número de equipos:"
         '
-        'Label9
+        'LblNuDir
         '
-        Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(13, 396)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(172, 20)
-        Me.Label9.TabIndex = 24
-        Me.Label9.Text = "Cantidad de direcciones:"
+        Me.LblNuDir.AutoSize = True
+        Me.LblNuDir.Location = New System.Drawing.Point(13, 473)
+        Me.LblNuDir.Name = "LblNuDir"
+        Me.LblNuDir.Size = New System.Drawing.Size(172, 20)
+        Me.LblNuDir.TabIndex = 24
+        Me.LblNuDir.Text = "Cantidad de direcciones:"
         '
         'TBRed
         '
         Me.TBRed.Enabled = False
-        Me.TBRed.Location = New System.Drawing.Point(182, 296)
+        Me.TBRed.Location = New System.Drawing.Point(182, 373)
         Me.TBRed.Name = "TBRed"
         Me.TBRed.Size = New System.Drawing.Size(125, 27)
         Me.TBRed.TabIndex = 25
@@ -344,7 +356,7 @@ Partial Class Form1
         'TBBroadcast
         '
         Me.TBBroadcast.Enabled = False
-        Me.TBBroadcast.Location = New System.Drawing.Point(182, 344)
+        Me.TBBroadcast.Location = New System.Drawing.Point(182, 421)
         Me.TBBroadcast.Name = "TBBroadcast"
         Me.TBBroadcast.Size = New System.Drawing.Size(125, 27)
         Me.TBBroadcast.TabIndex = 26
@@ -352,7 +364,7 @@ Partial Class Form1
         'TBDireccionUltima
         '
         Me.TBDireccionUltima.Enabled = False
-        Me.TBDireccionUltima.Location = New System.Drawing.Point(451, 344)
+        Me.TBDireccionUltima.Location = New System.Drawing.Point(451, 421)
         Me.TBDireccionUltima.Name = "TBDireccionUltima"
         Me.TBDireccionUltima.Size = New System.Drawing.Size(125, 27)
         Me.TBDireccionUltima.TabIndex = 28
@@ -360,7 +372,7 @@ Partial Class Form1
         'TBDireccionPrimera
         '
         Me.TBDireccionPrimera.Enabled = False
-        Me.TBDireccionPrimera.Location = New System.Drawing.Point(450, 296)
+        Me.TBDireccionPrimera.Location = New System.Drawing.Point(450, 373)
         Me.TBDireccionPrimera.Name = "TBDireccionPrimera"
         Me.TBDireccionPrimera.Size = New System.Drawing.Size(125, 27)
         Me.TBDireccionPrimera.TabIndex = 27
@@ -368,7 +380,7 @@ Partial Class Form1
         'TBCantidadDirecciones
         '
         Me.TBCantidadDirecciones.Enabled = False
-        Me.TBCantidadDirecciones.Location = New System.Drawing.Point(182, 393)
+        Me.TBCantidadDirecciones.Location = New System.Drawing.Point(182, 470)
         Me.TBCantidadDirecciones.Name = "TBCantidadDirecciones"
         Me.TBCantidadDirecciones.Size = New System.Drawing.Size(125, 27)
         Me.TBCantidadDirecciones.TabIndex = 30
@@ -376,33 +388,141 @@ Partial Class Form1
         'TBNumeroEquipos
         '
         Me.TBNumeroEquipos.Enabled = False
-        Me.TBNumeroEquipos.Location = New System.Drawing.Point(451, 393)
+        Me.TBNumeroEquipos.Location = New System.Drawing.Point(451, 470)
         Me.TBNumeroEquipos.Name = "TBNumeroEquipos"
         Me.TBNumeroEquipos.Size = New System.Drawing.Size(125, 27)
         Me.TBNumeroEquipos.TabIndex = 29
+        '
+        'LblMascaraSubred
+        '
+        Me.LblMascaraSubred.AutoSize = True
+        Me.LblMascaraSubred.Location = New System.Drawing.Point(15, 177)
+        Me.LblMascaraSubred.Name = "LblMascaraSubred"
+        Me.LblMascaraSubred.Size = New System.Drawing.Size(137, 20)
+        Me.LblMascaraSubred.TabIndex = 37
+        Me.LblMascaraSubred.Text = "Mascara de subred:"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(499, 177)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(49, 20)
+        Me.Label11.TabIndex = 36
+        Me.Label11.Text = "CICD :"
+        '
+        'NUDCICDSub
+        '
+        Me.NUDCICDSub.BackColor = System.Drawing.Color.DeepSkyBlue
+        Me.NUDCICDSub.Location = New System.Drawing.Point(548, 174)
+        Me.NUDCICDSub.Maximum = New Decimal(New Integer() {32, 0, 0, 0})
+        Me.NUDCICDSub.Name = "NUDCICDSub"
+        Me.NUDCICDSub.Size = New System.Drawing.Size(66, 27)
+        Me.NUDCICDSub.TabIndex = 35
+        '
+        'CBMascaraSub4
+        '
+        Me.CBMascaraSub4.BackColor = System.Drawing.Color.DeepSkyBlue
+        Me.CBMascaraSub4.FormattingEnabled = True
+        Me.CBMascaraSub4.Items.AddRange(New Object() {"0", "128", "192", "224", "240", "248", "252", "254", "255"})
+        Me.CBMascaraSub4.Location = New System.Drawing.Point(423, 173)
+        Me.CBMascaraSub4.Name = "CBMascaraSub4"
+        Me.CBMascaraSub4.Size = New System.Drawing.Size(66, 28)
+        Me.CBMascaraSub4.TabIndex = 34
+        '
+        'CBMascaraSub3
+        '
+        Me.CBMascaraSub3.BackColor = System.Drawing.Color.DeepSkyBlue
+        Me.CBMascaraSub3.FormattingEnabled = True
+        Me.CBMascaraSub3.Items.AddRange(New Object() {"0", "128", "192", "224", "240", "248", "252", "254", "255"})
+        Me.CBMascaraSub3.Location = New System.Drawing.Point(332, 173)
+        Me.CBMascaraSub3.Name = "CBMascaraSub3"
+        Me.CBMascaraSub3.Size = New System.Drawing.Size(66, 28)
+        Me.CBMascaraSub3.TabIndex = 33
+        '
+        'CBMascaraSub2
+        '
+        Me.CBMascaraSub2.BackColor = System.Drawing.Color.DeepSkyBlue
+        Me.CBMascaraSub2.FormattingEnabled = True
+        Me.CBMascaraSub2.Items.AddRange(New Object() {"0", "128", "192", "224", "240", "248", "252", "254", "255"})
+        Me.CBMascaraSub2.Location = New System.Drawing.Point(241, 173)
+        Me.CBMascaraSub2.Name = "CBMascaraSub2"
+        Me.CBMascaraSub2.Size = New System.Drawing.Size(66, 28)
+        Me.CBMascaraSub2.TabIndex = 32
+        '
+        'CBMascaraSub1
+        '
+        Me.CBMascaraSub1.BackColor = System.Drawing.Color.DeepSkyBlue
+        Me.CBMascaraSub1.FormattingEnabled = True
+        Me.CBMascaraSub1.Items.AddRange(New Object() {"0", "128", "192", "224", "240", "248", "252", "254", "255"})
+        Me.CBMascaraSub1.Location = New System.Drawing.Point(150, 173)
+        Me.CBMascaraSub1.Name = "CBMascaraSub1"
+        Me.CBMascaraSub1.Size = New System.Drawing.Size(66, 28)
+        Me.CBMascaraSub1.TabIndex = 31
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.RBMascaraSub)
+        Me.GroupBox1.Controls.Add(Me.RBCICDSub)
+        Me.GroupBox1.Location = New System.Drawing.Point(637, 150)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(176, 58)
+        Me.GroupBox1.TabIndex = 38
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Elección por"
+        '
+        'RBMascaraSub
+        '
+        Me.RBMascaraSub.AutoSize = True
+        Me.RBMascaraSub.Location = New System.Drawing.Point(5, 26)
+        Me.RBMascaraSub.Name = "RBMascaraSub"
+        Me.RBMascaraSub.Size = New System.Drawing.Size(85, 24)
+        Me.RBMascaraSub.TabIndex = 18
+        Me.RBMascaraSub.TabStop = True
+        Me.RBMascaraSub.Text = "Mascara"
+        Me.RBMascaraSub.UseVisualStyleBackColor = True
+        '
+        'RBCICDSub
+        '
+        Me.RBCICDSub.AutoSize = True
+        Me.RBCICDSub.Location = New System.Drawing.Point(107, 26)
+        Me.RBCICDSub.Name = "RBCICDSub"
+        Me.RBCICDSub.Size = New System.Drawing.Size(63, 24)
+        Me.RBCICDSub.TabIndex = 17
+        Me.RBCICDSub.TabStop = True
+        Me.RBCICDSub.Text = "CICD"
+        Me.RBCICDSub.UseVisualStyleBackColor = True
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.MediumAquamarine
-        Me.ClientSize = New System.Drawing.Size(851, 450)
+        Me.ClientSize = New System.Drawing.Size(851, 518)
+        Me.Controls.Add(Me.GroupBox1)
+        Me.Controls.Add(Me.LblMascaraSubred)
+        Me.Controls.Add(Me.Label11)
+        Me.Controls.Add(Me.NUDCICDSub)
+        Me.Controls.Add(Me.CBMascaraSub4)
+        Me.Controls.Add(Me.CBMascaraSub3)
+        Me.Controls.Add(Me.CBMascaraSub2)
+        Me.Controls.Add(Me.CBMascaraSub1)
         Me.Controls.Add(Me.TBCantidadDirecciones)
         Me.Controls.Add(Me.TBNumeroEquipos)
         Me.Controls.Add(Me.TBDireccionUltima)
         Me.Controls.Add(Me.TBDireccionPrimera)
         Me.Controls.Add(Me.TBBroadcast)
         Me.Controls.Add(Me.TBRed)
-        Me.Controls.Add(Me.Label9)
-        Me.Controls.Add(Me.Label8)
-        Me.Controls.Add(Me.Label7)
-        Me.Controls.Add(Me.Label6)
-        Me.Controls.Add(Me.Label5)
-        Me.Controls.Add(Me.Label4)
+        Me.Controls.Add(Me.LblNuDir)
+        Me.Controls.Add(Me.LblNuHosts)
+        Me.Controls.Add(Me.LblDirPrimera)
+        Me.Controls.Add(Me.LblDirUltima)
+        Me.Controls.Add(Me.LblDirBroadcast)
+        Me.Controls.Add(Me.LblDirRed)
         Me.Controls.Add(Me.BtnLimpiar)
         Me.Controls.Add(Me.BtnCalcular)
         Me.Controls.Add(Me.GBEleccionMascara)
-        Me.Controls.Add(Me.Label3)
+        Me.Controls.Add(Me.LblMascaraRed)
         Me.Controls.Add(Me.Label2)
         Me.Controls.Add(Me.NUDcicd)
         Me.Controls.Add(Me.CBMascara4)
@@ -410,7 +530,7 @@ Partial Class Form1
         Me.Controls.Add(Me.CBMascara2)
         Me.Controls.Add(Me.CBMascara1)
         Me.Controls.Add(Me.GBClaseRed)
-        Me.Controls.Add(Me.Label1)
+        Me.Controls.Add(Me.LblDireccionIP)
         Me.Controls.Add(Me.NUDRed4)
         Me.Controls.Add(Me.NUDRed3)
         Me.Controls.Add(Me.NUDRed2)
@@ -426,6 +546,9 @@ Partial Class Form1
         CType(Me.NUDcicd, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GBEleccionMascara.ResumeLayout(False)
         Me.GBEleccionMascara.PerformLayout()
+        CType(Me.NUDCICDSub, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -435,7 +558,7 @@ Partial Class Form1
     Friend WithEvents NUDRed2 As NumericUpDown
     Friend WithEvents NUDRed3 As NumericUpDown
     Friend WithEvents NUDRed4 As NumericUpDown
-    Friend WithEvents Label1 As Label
+    Friend WithEvents LblDireccionIP As Label
     Friend WithEvents RBClaseA As RadioButton
     Friend WithEvents RBClaseC As RadioButton
     Friend WithEvents RBClaseB As RadioButton
@@ -446,22 +569,32 @@ Partial Class Form1
     Friend WithEvents CBMascara4 As ComboBox
     Friend WithEvents NUDcicd As NumericUpDown
     Friend WithEvents Label2 As Label
-    Friend WithEvents Label3 As Label
+    Friend WithEvents LblMascaraRed As Label
     Friend WithEvents GBEleccionMascara As GroupBox
     Friend WithEvents RBMascara As RadioButton
     Friend WithEvents RBcicd As RadioButton
     Friend WithEvents BtnCalcular As Button
     Friend WithEvents BtnLimpiar As Button
-    Friend WithEvents Label4 As Label
-    Friend WithEvents Label5 As Label
-    Friend WithEvents Label6 As Label
-    Friend WithEvents Label7 As Label
-    Friend WithEvents Label8 As Label
-    Friend WithEvents Label9 As Label
+    Friend WithEvents LblDirRed As Label
+    Friend WithEvents LblDirBroadcast As Label
+    Friend WithEvents LblDirUltima As Label
+    Friend WithEvents LblDirPrimera As Label
+    Friend WithEvents LblNuHosts As Label
+    Friend WithEvents LblNuDir As Label
     Friend WithEvents TBRed As TextBox
     Friend WithEvents TBBroadcast As TextBox
     Friend WithEvents TBDireccionUltima As TextBox
     Friend WithEvents TBDireccionPrimera As TextBox
     Friend WithEvents TBCantidadDirecciones As TextBox
     Friend WithEvents TBNumeroEquipos As TextBox
+    Friend WithEvents LblMascaraSubred As Label
+    Friend WithEvents Label11 As Label
+    Friend WithEvents NUDCICDSub As NumericUpDown
+    Friend WithEvents CBMascaraSub4 As ComboBox
+    Friend WithEvents CBMascaraSub3 As ComboBox
+    Friend WithEvents CBMascaraSub2 As ComboBox
+    Friend WithEvents CBMascaraSub1 As ComboBox
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents RBMascaraSub As RadioButton
+    Friend WithEvents RBCICDSub As RadioButton
 End Class
