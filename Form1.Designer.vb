@@ -35,12 +35,12 @@ Partial Class Form1
         Me.CBMascara2 = New System.Windows.Forms.ComboBox()
         Me.CBMascara3 = New System.Windows.Forms.ComboBox()
         Me.CBMascara4 = New System.Windows.Forms.ComboBox()
-        Me.NUDcicd = New System.Windows.Forms.NumericUpDown()
+        Me.NUDcidr = New System.Windows.Forms.NumericUpDown()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.LblMascaraRed = New System.Windows.Forms.Label()
         Me.GBEleccionMascara = New System.Windows.Forms.GroupBox()
         Me.RBMascara = New System.Windows.Forms.RadioButton()
-        Me.RBcicd = New System.Windows.Forms.RadioButton()
+        Me.RBcidr = New System.Windows.Forms.RadioButton()
         Me.BtnCalcular = New System.Windows.Forms.Button()
         Me.BtnLimpiar = New System.Windows.Forms.Button()
         Me.LblDirRed = New System.Windows.Forms.Label()
@@ -57,22 +57,22 @@ Partial Class Form1
         Me.TBNumeroEquipos = New System.Windows.Forms.TextBox()
         Me.LblMascaraSubred = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.NUDCICDSub = New System.Windows.Forms.NumericUpDown()
+        Me.NUDCIDRSub = New System.Windows.Forms.NumericUpDown()
         Me.CBMascaraSub4 = New System.Windows.Forms.ComboBox()
         Me.CBMascaraSub3 = New System.Windows.Forms.ComboBox()
         Me.CBMascaraSub2 = New System.Windows.Forms.ComboBox()
         Me.CBMascaraSub1 = New System.Windows.Forms.ComboBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.RBMascaraSub = New System.Windows.Forms.RadioButton()
-        Me.RBCICDSub = New System.Windows.Forms.RadioButton()
+        Me.RBCIDRSub = New System.Windows.Forms.RadioButton()
         CType(Me.NUDRed1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NUDRed2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NUDRed3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NUDRed4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GBClaseRed.SuspendLayout()
-        CType(Me.NUDcicd, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.NUDcidr, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GBEleccionMascara.SuspendLayout()
-        CType(Me.NUDCICDSub, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.NUDCIDRSub, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -206,14 +206,14 @@ Partial Class Form1
         Me.CBMascara4.Size = New System.Drawing.Size(66, 28)
         Me.CBMascara4.TabIndex = 12
         '
-        'NUDcicd
+        'NUDcidr
         '
-        Me.NUDcicd.BackColor = System.Drawing.Color.DeepSkyBlue
-        Me.NUDcicd.Location = New System.Drawing.Point(550, 103)
-        Me.NUDcicd.Maximum = New Decimal(New Integer() {32, 0, 0, 0})
-        Me.NUDcicd.Name = "NUDcicd"
-        Me.NUDcicd.Size = New System.Drawing.Size(66, 27)
-        Me.NUDcicd.TabIndex = 13
+        Me.NUDcidr.BackColor = System.Drawing.Color.DeepSkyBlue
+        Me.NUDcidr.Location = New System.Drawing.Point(550, 103)
+        Me.NUDcidr.Maximum = New Decimal(New Integer() {32, 0, 0, 0})
+        Me.NUDcidr.Name = "NUDcidr"
+        Me.NUDcidr.Size = New System.Drawing.Size(66, 27)
+        Me.NUDcidr.TabIndex = 13
         '
         'Label2
         '
@@ -236,7 +236,7 @@ Partial Class Form1
         'GBEleccionMascara
         '
         Me.GBEleccionMascara.Controls.Add(Me.RBMascara)
-        Me.GBEleccionMascara.Controls.Add(Me.RBcicd)
+        Me.GBEleccionMascara.Controls.Add(Me.RBcidr)
         Me.GBEleccionMascara.Location = New System.Drawing.Point(637, 77)
         Me.GBEleccionMascara.Name = "GBEleccionMascara"
         Me.GBEleccionMascara.Size = New System.Drawing.Size(176, 58)
@@ -255,16 +255,16 @@ Partial Class Form1
         Me.RBMascara.Text = "Mascara"
         Me.RBMascara.UseVisualStyleBackColor = True
         '
-        'RBcicd
+        'RBcidr
         '
-        Me.RBcicd.AutoSize = True
-        Me.RBcicd.Location = New System.Drawing.Point(107, 26)
-        Me.RBcicd.Name = "RBcicd"
-        Me.RBcicd.Size = New System.Drawing.Size(63, 24)
-        Me.RBcicd.TabIndex = 17
-        Me.RBcicd.TabStop = True
-        Me.RBcicd.Text = "CICD"
-        Me.RBcicd.UseVisualStyleBackColor = True
+        Me.RBcidr.AutoSize = True
+        Me.RBcidr.Location = New System.Drawing.Point(107, 26)
+        Me.RBcidr.Name = "RBcidr"
+        Me.RBcidr.Size = New System.Drawing.Size(63, 24)
+        Me.RBcidr.TabIndex = 17
+        Me.RBcidr.TabStop = True
+        Me.RBcidr.Text = "CIDR"
+        Me.RBcidr.UseVisualStyleBackColor = True
         '
         'BtnCalcular
         '
@@ -347,49 +347,49 @@ Partial Class Form1
         '
         'TBRed
         '
-        Me.TBRed.Enabled = False
         Me.TBRed.Location = New System.Drawing.Point(182, 373)
         Me.TBRed.Name = "TBRed"
+        Me.TBRed.ReadOnly = True
         Me.TBRed.Size = New System.Drawing.Size(125, 27)
         Me.TBRed.TabIndex = 25
         '
         'TBBroadcast
         '
-        Me.TBBroadcast.Enabled = False
         Me.TBBroadcast.Location = New System.Drawing.Point(182, 421)
         Me.TBBroadcast.Name = "TBBroadcast"
+        Me.TBBroadcast.ReadOnly = True
         Me.TBBroadcast.Size = New System.Drawing.Size(125, 27)
         Me.TBBroadcast.TabIndex = 26
         '
         'TBDireccionUltima
         '
-        Me.TBDireccionUltima.Enabled = False
         Me.TBDireccionUltima.Location = New System.Drawing.Point(451, 421)
         Me.TBDireccionUltima.Name = "TBDireccionUltima"
+        Me.TBDireccionUltima.ReadOnly = True
         Me.TBDireccionUltima.Size = New System.Drawing.Size(125, 27)
         Me.TBDireccionUltima.TabIndex = 28
         '
         'TBDireccionPrimera
         '
-        Me.TBDireccionPrimera.Enabled = False
         Me.TBDireccionPrimera.Location = New System.Drawing.Point(450, 373)
         Me.TBDireccionPrimera.Name = "TBDireccionPrimera"
+        Me.TBDireccionPrimera.ReadOnly = True
         Me.TBDireccionPrimera.Size = New System.Drawing.Size(125, 27)
         Me.TBDireccionPrimera.TabIndex = 27
         '
         'TBCantidadDirecciones
         '
-        Me.TBCantidadDirecciones.Enabled = False
         Me.TBCantidadDirecciones.Location = New System.Drawing.Point(182, 470)
         Me.TBCantidadDirecciones.Name = "TBCantidadDirecciones"
+        Me.TBCantidadDirecciones.ReadOnly = True
         Me.TBCantidadDirecciones.Size = New System.Drawing.Size(125, 27)
         Me.TBCantidadDirecciones.TabIndex = 30
         '
         'TBNumeroEquipos
         '
-        Me.TBNumeroEquipos.Enabled = False
         Me.TBNumeroEquipos.Location = New System.Drawing.Point(451, 470)
         Me.TBNumeroEquipos.Name = "TBNumeroEquipos"
+        Me.TBNumeroEquipos.ReadOnly = True
         Me.TBNumeroEquipos.Size = New System.Drawing.Size(125, 27)
         Me.TBNumeroEquipos.TabIndex = 29
         '
@@ -411,14 +411,14 @@ Partial Class Form1
         Me.Label11.TabIndex = 36
         Me.Label11.Text = "CICD :"
         '
-        'NUDCICDSub
+        'NUDCIDRSub
         '
-        Me.NUDCICDSub.BackColor = System.Drawing.Color.DeepSkyBlue
-        Me.NUDCICDSub.Location = New System.Drawing.Point(548, 174)
-        Me.NUDCICDSub.Maximum = New Decimal(New Integer() {32, 0, 0, 0})
-        Me.NUDCICDSub.Name = "NUDCICDSub"
-        Me.NUDCICDSub.Size = New System.Drawing.Size(66, 27)
-        Me.NUDCICDSub.TabIndex = 35
+        Me.NUDCIDRSub.BackColor = System.Drawing.Color.DeepSkyBlue
+        Me.NUDCIDRSub.Location = New System.Drawing.Point(548, 174)
+        Me.NUDCIDRSub.Maximum = New Decimal(New Integer() {32, 0, 0, 0})
+        Me.NUDCIDRSub.Name = "NUDCIDRSub"
+        Me.NUDCIDRSub.Size = New System.Drawing.Size(66, 27)
+        Me.NUDCIDRSub.TabIndex = 35
         '
         'CBMascaraSub4
         '
@@ -463,7 +463,7 @@ Partial Class Form1
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.RBMascaraSub)
-        Me.GroupBox1.Controls.Add(Me.RBCICDSub)
+        Me.GroupBox1.Controls.Add(Me.RBCIDRSub)
         Me.GroupBox1.Location = New System.Drawing.Point(637, 150)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(176, 58)
@@ -482,16 +482,16 @@ Partial Class Form1
         Me.RBMascaraSub.Text = "Mascara"
         Me.RBMascaraSub.UseVisualStyleBackColor = True
         '
-        'RBCICDSub
+        'RBCIDRSub
         '
-        Me.RBCICDSub.AutoSize = True
-        Me.RBCICDSub.Location = New System.Drawing.Point(107, 26)
-        Me.RBCICDSub.Name = "RBCICDSub"
-        Me.RBCICDSub.Size = New System.Drawing.Size(63, 24)
-        Me.RBCICDSub.TabIndex = 17
-        Me.RBCICDSub.TabStop = True
-        Me.RBCICDSub.Text = "CICD"
-        Me.RBCICDSub.UseVisualStyleBackColor = True
+        Me.RBCIDRSub.AutoSize = True
+        Me.RBCIDRSub.Location = New System.Drawing.Point(107, 26)
+        Me.RBCIDRSub.Name = "RBCIDRSub"
+        Me.RBCIDRSub.Size = New System.Drawing.Size(63, 24)
+        Me.RBCIDRSub.TabIndex = 17
+        Me.RBCIDRSub.TabStop = True
+        Me.RBCIDRSub.Text = "CIDR"
+        Me.RBCIDRSub.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -502,7 +502,7 @@ Partial Class Form1
         Me.Controls.Add(Me.GroupBox1)
         Me.Controls.Add(Me.LblMascaraSubred)
         Me.Controls.Add(Me.Label11)
-        Me.Controls.Add(Me.NUDCICDSub)
+        Me.Controls.Add(Me.NUDCIDRSub)
         Me.Controls.Add(Me.CBMascaraSub4)
         Me.Controls.Add(Me.CBMascaraSub3)
         Me.Controls.Add(Me.CBMascaraSub2)
@@ -524,7 +524,7 @@ Partial Class Form1
         Me.Controls.Add(Me.GBEleccionMascara)
         Me.Controls.Add(Me.LblMascaraRed)
         Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.NUDcicd)
+        Me.Controls.Add(Me.NUDcidr)
         Me.Controls.Add(Me.CBMascara4)
         Me.Controls.Add(Me.CBMascara3)
         Me.Controls.Add(Me.CBMascara2)
@@ -543,10 +543,10 @@ Partial Class Form1
         CType(Me.NUDRed4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GBClaseRed.ResumeLayout(False)
         Me.GBClaseRed.PerformLayout()
-        CType(Me.NUDcicd, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NUDcidr, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GBEleccionMascara.ResumeLayout(False)
         Me.GBEleccionMascara.PerformLayout()
-        CType(Me.NUDCICDSub, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.NUDCIDRSub, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
@@ -567,12 +567,12 @@ Partial Class Form1
     Friend WithEvents CBMascara2 As ComboBox
     Friend WithEvents CBMascara3 As ComboBox
     Friend WithEvents CBMascara4 As ComboBox
-    Friend WithEvents NUDcicd As NumericUpDown
+    Friend WithEvents NUDcidr As NumericUpDown
     Friend WithEvents Label2 As Label
     Friend WithEvents LblMascaraRed As Label
     Friend WithEvents GBEleccionMascara As GroupBox
     Friend WithEvents RBMascara As RadioButton
-    Friend WithEvents RBcicd As RadioButton
+    Friend WithEvents RBcidr As RadioButton
     Friend WithEvents BtnCalcular As Button
     Friend WithEvents BtnLimpiar As Button
     Friend WithEvents LblDirRed As Label
@@ -589,12 +589,12 @@ Partial Class Form1
     Friend WithEvents TBNumeroEquipos As TextBox
     Friend WithEvents LblMascaraSubred As Label
     Friend WithEvents Label11 As Label
-    Friend WithEvents NUDCICDSub As NumericUpDown
+    Friend WithEvents NUDCIDRSub As NumericUpDown
     Friend WithEvents CBMascaraSub4 As ComboBox
     Friend WithEvents CBMascaraSub3 As ComboBox
     Friend WithEvents CBMascaraSub2 As ComboBox
     Friend WithEvents CBMascaraSub1 As ComboBox
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents RBMascaraSub As RadioButton
-    Friend WithEvents RBCICDSub As RadioButton
+    Friend WithEvents RBCIDRSub As RadioButton
 End Class

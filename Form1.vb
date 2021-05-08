@@ -1,9 +1,69 @@
 ﻿Public Class Form1
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
+
         RBClaseA.Checked = True
         RBMascara.Checked = True
         RBMascaraSub.Checked = True
+
+        Dim Ott As New ToolTip
+
+        Ott.IsBalloon = True
+
+        Ott.InitialDelay = 300
+        Ott.ReshowDelay = 20
+        Ott.AutoPopDelay = 8000
+
+        Ott.SetToolTip(CBMascara1, "Byte más alto de la máscara de red")
+        Ott.SetToolTip(CBMascara2, "Segundo byte con más peso de la máscara de red")
+        Ott.SetToolTip(CBMascara3, "Segundo byte con menos peso de la máscara de red")
+        Ott.SetToolTip(CBMascara4, "Byte más bajo de la máscara de red")
+        Ott.SetToolTip(CBMascaraSub1, "Byte más alto de la máscara de subred")
+        Ott.SetToolTip(CBMascaraSub2, "Segundo byte con más peso de la máscara de subred")
+        Ott.SetToolTip(CBMascaraSub3, "Segundo byte con menos peso de la máscara de subred")
+        Ott.SetToolTip(CBMascaraSub4, "Byte más bajo de la máscara de subred")
+
+        Ott.SetToolTip(NUDcidr, "Valor CIDR de la máscara de red")
+        Ott.SetToolTip(NUDCIDRSub, "Valor CIDR de la máscara de subred")
+        Ott.SetToolTip(NUDRed1, "Primer octeto de la dirección de red")
+        Ott.SetToolTip(NUDRed2, "Segundo octeto de la dirección de red")
+        Ott.SetToolTip(NUDRed3, "Tercero octeto de la dirección de red")
+        Ott.SetToolTip(NUDRed4, "Cuarto octeto de la dirección de red")
+
+        Ott.SetToolTip(RBcidr, "Activado se seleccionará la máscara de red por el valor CIDR")
+        Ott.SetToolTip(RBCIDRSub, "Activado se seleccionará la máscara de subred por el valor CIDR")
+        Ott.SetToolTip(RBMascara, "Activado se seleccionará la máscara de red por los octetos de la máscara de red")
+        Ott.SetToolTip(RBMascaraSub, "Activado se seleccionará la máscara de red por los octetos de la máscara de subred")
+        Ott.SetToolTip(RBClaseA, "Se implementará los parametros de red de la clase A")
+        Ott.SetToolTip(RBClaseB, "Se implementará los parametros de red de la clase B")
+        Ott.SetToolTip(RBClaseC, "Se implementará los parametros de red de la clase C")
+
+        Ott.SetToolTip(TBBroadcast, "Dirección broadcast de la red")
+        Ott.SetToolTip(TBCantidadDirecciones, "Número de direcciones que tiene la red")
+        Ott.SetToolTip(TBDireccionPrimera, "Primera dirección útil de la red")
+        Ott.SetToolTip(TBDireccionUltima, "Última dirección útil de la red")
+        Ott.SetToolTip(TBNumeroEquipos, "Número de Equipos que puede haber en la red")
+        Ott.SetToolTip(TBRed, "Dirección de la red")
+
+        Ott.SetToolTip(GBClaseRed, "Grupo donde se selecciona la clase da la dirección")
+        Ott.SetToolTip(GBEleccionMascara, "Se decide si la máscara de red se selecciona por valor de máscara o por valor cidr")
+
+        Ott.SetToolTip(BtnCalcular, "Botón para realizar los datos")
+        Ott.SetToolTip(BtnLimpiar, "Resetea los valores por defecto de la entrada y vácia los elementos de sálida.")
+
+
+
+        Ott.SetToolTip(LblDireccionIP, "Elección de la dirección de red")
+        Ott.SetToolTip(LblMascaraRed, "Elección de la máscara de red")
+        Ott.SetToolTip(LblMascaraSubred, "Elección de la máscara de subred")
+
+        Ott.SetToolTip(LblDirBroadcast, "Dirección broadcast de la red")
+        Ott.SetToolTip(LblDirPrimera, "Primera dirección útil de la red")
+        Ott.SetToolTip(LblDirRed, "Dirección de la red")
+        Ott.SetToolTip(LblDirUltima, "Última dirección útil de la red")
+        Ott.SetToolTip(LblNuDir, "Número de direcciones que tiene la red")
+        Ott.SetToolTip(LblNuHosts, "Número de Equipos que puede haber en la red")
+
 
 
     End Sub
@@ -25,7 +85,7 @@
         Dim i As Integer
 
         mascara = 0
-        For i = 31 To 32 - NUDcicd.Value Step -1
+        For i = 31 To 32 - NUDcidr.Value Step -1
             mascara = mascara + 2 ^ i
         Next i
 
@@ -33,7 +93,7 @@
 
         red = red And mascara
 
-        cantidad = 2 ^ (32 - NUDcicd.Value)
+        cantidad = 2 ^ (32 - NUDcidr.Value)
 
         primeraDireccion = red + 1
         ultimaDireccion = red + cantidad - 1
@@ -55,7 +115,7 @@
                                  listaBytes(1).ToString + "." + listaBytes(0).ToString
 
 
-        If NUDcicd.Value = 32 Then
+        If NUDcidr.Value = 32 Then
             TBCantidadDirecciones.Text = 0
             TBNumeroEquipos.Text = 0
         Else
@@ -94,6 +154,8 @@
 
     Private Sub RBClaseA_CheckedChanged(sender As Object, e As EventArgs) Handles RBClaseA.CheckedChanged
         'Clase A:  10.0.0.0 a 10.255.255.255 (8 bits red, 24 bits hosts)
+
+
         If sender.checked = True Then
             NUDRed1.Minimum = 10
             NUDRed1.Maximum = 10
@@ -111,15 +173,19 @@
             NUDRed4.Maximum = 255
             NUDRed4.Value = 0
 
+
             CBMascara1.SelectedIndex = 8
-            CBMascara1.Enabled = False
             CBMascara2.SelectedIndex = 0
-            CBMascara2.Enabled = True
             CBMascara3.SelectedIndex = 0
-            CBMascara3.Enabled = False
             CBMascara4.SelectedIndex = 0
-            CBMascara4.Enabled = False
-            NUDcicd.Value = 8
+
+            CBMascaraSub1.SelectedIndex = 8
+            CBMascaraSub2.SelectedIndex = 0
+            CBMascaraSub3.SelectedIndex = 0
+            CBMascaraSub4.SelectedIndex = 0
+
+            NUDcidr.Value = 8
+
         End If
 
     End Sub
@@ -146,14 +212,16 @@
             NUDRed4.Value = 0
 
             CBMascara1.SelectedIndex = 8
-            CBMascara1.Enabled = False
             CBMascara2.SelectedIndex = 8
-            CBMascara2.Enabled = False
             CBMascara3.SelectedIndex = 0
-            CBMascara3.Enabled = True
             CBMascara4.SelectedIndex = 0
-            CBMascara4.Enabled = False
-            NUDcicd.Value = 16
+
+            CBMascaraSub1.SelectedIndex = 8
+            CBMascaraSub2.SelectedIndex = 8
+            CBMascaraSub3.SelectedIndex = 0
+            CBMascaraSub4.SelectedIndex = 0
+
+            NUDcidr.Value = 16
         End If
 
     End Sub
@@ -179,14 +247,17 @@
             NUDRed4.Value = 0
 
             CBMascara1.SelectedIndex = 8
-            CBMascara1.Enabled = False
             CBMascara2.SelectedIndex = 8
-            CBMascara2.Enabled = False
             CBMascara3.SelectedIndex = 8
-            CBMascara3.Enabled = False
             CBMascara4.SelectedIndex = 0
-            CBMascara4.Enabled = True
-            NUDcicd.Value = 24
+
+            CBMascaraSub1.SelectedIndex = 8
+            CBMascaraSub2.SelectedIndex = 8
+            CBMascaraSub3.SelectedIndex = 8
+            CBMascaraSub4.SelectedIndex = 0
+
+
+            NUDcidr.Value = 24
 
         End If
 
@@ -202,15 +273,15 @@
     ' --------------------------------------------------------------------------------------------------------------
 
 
-    Private Sub RBcicd_CheckedChanged(sender As Object, e As EventArgs) Handles RBcicd.CheckedChanged
+    Private Sub RBcidr_CheckedChanged(sender As Object, e As EventArgs) Handles RBcidr.CheckedChanged
 
-        If RBcicd.Checked = True Then
+        If RBcidr.Checked = True Then
 
             CBMascara1.Enabled = False
             CBMascara2.Enabled = False
             CBMascara3.Enabled = False
             CBMascara4.Enabled = False
-            NUDcicd.Enabled = True
+            NUDcidr.Enabled = True
 
         End If
 
@@ -223,28 +294,28 @@
 
             CBMascara1.Enabled = True
 
-            If CBMascara1.SelectedIndex = 8 Then CBMascara2.Enabled = True
+            If CBMascara1.SelectedIndex = 8 Then CBMascara2.Enabled = True Else CBMascara2.Enabled = False
 
-            If CBMascara2.SelectedIndex = 8 Then CBMascara3.Enabled = True
+            If CBMascara2.SelectedIndex = 8 Then CBMascara3.Enabled = True Else CBMascara3.Enabled = False
 
-            If CBMascara3.SelectedIndex = 8 Then CBMascara4.Enabled = True
+            If CBMascara3.SelectedIndex = 8 Then CBMascara4.Enabled = True Else CBMascara4.Enabled = False
 
-            NUDcicd.Enabled = False
-            Select Case NUDcicd.Value
+            NUDcidr.Enabled = False
+            Select Case NUDcidr.Value
                 Case < 8
-                    CBMascara1.SelectedIndex = NUDcicd.Value
+                    CBMascara1.SelectedIndex = NUDcidr.Value
                 Case 8 To 16
                     CBMascara1.SelectedIndex = 8
-                    CBMascara2.SelectedIndex = NUDcicd.Value - 8
+                    CBMascara2.SelectedIndex = NUDcidr.Value - 8
                 Case 17 To 24
                     CBMascara1.SelectedIndex = 8
                     CBMascara2.SelectedIndex = 8
-                    CBMascara3.SelectedIndex = NUDcicd.Value - 16
+                    CBMascara3.SelectedIndex = NUDcidr.Value - 16
                 Case > 24
                     CBMascara1.SelectedIndex = 8
                     CBMascara2.SelectedIndex = 8
                     CBMascara3.SelectedIndex = 8
-                    CBMascara4.SelectedIndex = NUDcicd.Value - 24
+                    CBMascara4.SelectedIndex = NUDcidr.Value - 24
             End Select
 
         End If
@@ -252,31 +323,32 @@
 
     End Sub
 
-    Private Sub NUDcicd_ValueChanged(sender As Object, e As EventArgs) Handles NUDcicd.ValueChanged
-        Select Case NUDcicd.Value
+    Private Sub NUDcidr_ValueChanged(sender As Object, e As EventArgs) Handles NUDcidr.ValueChanged
+
+        Select Case NUDcidr.Value
             Case 0 To 8
-                CBMascara1.SelectedIndex = NUDcicd.Value
+                CBMascara1.SelectedIndex = NUDcidr.Value
                 CBMascara2.SelectedIndex = 0
                 CBMascara3.SelectedIndex = 0
                 CBMascara4.SelectedIndex = 0
             Case 9 To 16
                 CBMascara1.SelectedIndex = 8
-                CBMascara2.SelectedIndex = NUDcicd.Value - 8
+                CBMascara2.SelectedIndex = NUDcidr.Value - 8
                 CBMascara3.SelectedIndex = 0
                 CBMascara4.SelectedIndex = 0
             Case 17 To 24
                 CBMascara1.SelectedIndex = 8
                 CBMascara2.SelectedIndex = 8
-                CBMascara3.SelectedIndex = NUDcicd.Value - 16
+                CBMascara3.SelectedIndex = NUDcidr.Value - 16
                 CBMascara4.SelectedIndex = 0
             Case > 24
                 CBMascara1.SelectedIndex = 8
                 CBMascara2.SelectedIndex = 8
                 CBMascara3.SelectedIndex = 8
-                CBMascara4.SelectedIndex = NUDcicd.Value - 24
+                CBMascara4.SelectedIndex = NUDcidr.Value - 24
         End Select
 
-        NUDCICDSub.Minimum = NUDcicd.Value
+        NUDCIDRSub.Minimum = NUDcidr.Value
 
     End Sub
 
@@ -290,7 +362,7 @@
         CBMascara4.Enabled = False
         CBMascara4.SelectedIndex = 0
 
-        NUDcicd.Value = CBMascara1.SelectedIndex + CBMascara2.SelectedIndex + CBMascara3.SelectedIndex + CBMascara4.SelectedIndex
+        NUDcidr.Value = CBMascara1.SelectedIndex + CBMascara2.SelectedIndex + CBMascara3.SelectedIndex + CBMascara4.SelectedIndex
 
     End Sub
 
@@ -302,7 +374,7 @@
         CBMascara4.Enabled = False
         CBMascara4.SelectedIndex = 0
 
-        NUDcicd.Value = CBMascara1.SelectedIndex + CBMascara2.SelectedIndex + CBMascara3.SelectedIndex + CBMascara4.SelectedIndex
+        NUDcidr.Value = CBMascara1.SelectedIndex + CBMascara2.SelectedIndex + CBMascara3.SelectedIndex + CBMascara4.SelectedIndex
 
     End Sub
 
@@ -312,13 +384,13 @@
 
         CBMascara4.SelectedIndex = 0
 
-        NUDcicd.Value = CBMascara1.SelectedIndex + CBMascara2.SelectedIndex + CBMascara3.SelectedIndex + CBMascara4.SelectedIndex
+        NUDcidr.Value = CBMascara1.SelectedIndex + CBMascara2.SelectedIndex + CBMascara3.SelectedIndex + CBMascara4.SelectedIndex
 
     End Sub
 
     Private Sub CBMascara4_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CBMascara4.SelectedIndexChanged
 
-        NUDcicd.Value = CBMascara1.SelectedIndex + CBMascara2.SelectedIndex + CBMascara3.SelectedIndex + CBMascara4.SelectedIndex
+        NUDcidr.Value = CBMascara1.SelectedIndex + CBMascara2.SelectedIndex + CBMascara3.SelectedIndex + CBMascara4.SelectedIndex
 
     End Sub
 
@@ -332,15 +404,15 @@
     ' --------------------------------------------------------------------------------------------------------------
 
 
-    Private Sub RBcicdSub_CheckedChanged(sender As Object, e As EventArgs) Handles RBCICDSub.CheckedChanged
+    Private Sub RBcidrSub_CheckedChanged(sender As Object, e As EventArgs) Handles RBCIDRSub.CheckedChanged
 
-        If RBCICDSub.Checked = True Then
+        If RBCIDRSub.Checked = True Then
 
             CBMascaraSub1.Enabled = False
             CBMascaraSub2.Enabled = False
             CBMascaraSub3.Enabled = False
             CBMascaraSub4.Enabled = False
-            NUDCICDSub.Enabled = True
+            NUDCIDRSub.Enabled = True
 
         End If
 
@@ -352,29 +424,29 @@
         If RBMascaraSub.Checked = True Then
 
             CBMascaraSub1.Enabled = True
-            If CBMascaraSub1.SelectedIndex = 8 Then CBMascaraSub2.Enabled = True
+            If CBMascaraSub1.SelectedIndex = 8 Then CBMascaraSub2.Enabled = True Else CBMascaraSub2.Enabled = False
 
-            If CBMascaraSub2.SelectedIndex = 8 Then CBMascaraSub3.Enabled = True
+            If CBMascaraSub2.SelectedIndex = 8 Then CBMascaraSub3.Enabled = True Else CBMascaraSub3.Enabled = False
 
-            If CBMascaraSub3.SelectedIndex = 8 Then CBMascaraSub4.Enabled = True
+            If CBMascaraSub3.SelectedIndex = 8 Then CBMascaraSub4.Enabled = True Else CBMascaraSub4.Enabled = False
 
-            NUDCICDSub.Enabled = False
+            NUDCIDRSub.Enabled = False
 
-            Select Case NUDCICDSub.Value
+            Select Case NUDCIDRSub.Value
                 Case < 8
-                    CBMascaraSub1.SelectedIndex = NUDCICDSub.Value
+                    CBMascaraSub1.SelectedIndex = NUDCIDRSub.Value
                 Case 8 To 16
                     CBMascaraSub1.SelectedIndex = 8
-                    CBMascaraSub2.SelectedIndex = NUDCICDSub.Value - 8
+                    CBMascaraSub2.SelectedIndex = NUDCIDRSub.Value - 8
                 Case 17 To 24
                     CBMascaraSub1.SelectedIndex = 8
                     CBMascaraSub2.SelectedIndex = 8
-                    CBMascaraSub3.SelectedIndex = NUDCICDSub.Value - 16
+                    CBMascaraSub3.SelectedIndex = NUDCIDRSub.Value - 16
                 Case > 24
                     CBMascaraSub1.SelectedIndex = 8
                     CBMascaraSub2.SelectedIndex = 8
                     CBMascaraSub3.SelectedIndex = 8
-                    CBMascaraSub4.SelectedIndex = NUDCICDSub.Value - 24
+                    CBMascaraSub4.SelectedIndex = NUDCIDRSub.Value - 24
             End Select
 
         End If
@@ -382,29 +454,29 @@
 
     End Sub
 
-    Private Sub NUDcicdsub_ValueChanged(sender As Object, e As EventArgs) Handles NUDCICDSub.ValueChanged
+    Private Sub NUDcidrsub_ValueChanged(sender As Object, e As EventArgs) Handles NUDCIDRSub.ValueChanged
 
-        Select Case NUDCICDSub.Value
+        Select Case NUDCIDRSub.Value
             Case 0 To 8
-                CBMascaraSub1.SelectedIndex = NUDCICDSub.Value
-                CBMascaraSub2.SelectedIndex = 0
-                CBMascaraSub3.SelectedIndex = 0
-                CBMascaraSub4.SelectedIndex = 0
+                CBMascaraSub1.SelectedIndex = NUDCIDRSub.Value
+                'CBMascaraSub2.SelectedIndex = 0
+                'CBMascaraSub3.SelectedIndex = 0
+                'CBMascaraSub4.SelectedIndex = 0
             Case 9 To 16
                 CBMascaraSub1.SelectedIndex = 8
-                CBMascaraSub2.SelectedIndex = NUDCICDSub.Value - 8
-                CBMascaraSub3.SelectedIndex = 0
-                CBMascaraSub4.SelectedIndex = 0
+                CBMascaraSub2.SelectedIndex = NUDCIDRSub.Value - 8
+                'CBMascaraSub3.SelectedIndex = 0
+                'CBMascaraSub4.SelectedIndex = 0
             Case 17 To 24
                 CBMascaraSub1.SelectedIndex = 8
                 CBMascaraSub2.SelectedIndex = 8
-                CBMascaraSub3.SelectedIndex = NUDCICDSub.Value - 16
-                CBMascaraSub4.SelectedIndex = 0
+                CBMascaraSub3.SelectedIndex = NUDCIDRSub.Value - 16
+                'CBMascaraSub4.SelectedIndex = 0
             Case > 24
                 CBMascaraSub1.SelectedIndex = 8
                 CBMascaraSub2.SelectedIndex = 8
                 CBMascaraSub3.SelectedIndex = 8
-                CBMascaraSub4.SelectedIndex = NUDCICDSub.Value - 24
+                CBMascaraSub4.SelectedIndex = NUDCIDRSub.Value - 24
         End Select
 
     End Sub
@@ -415,7 +487,7 @@
 
         valor = CBMascaraSub1.SelectedIndex + CBMascaraSub2.SelectedIndex + CBMascaraSub3.SelectedIndex + CBMascaraSub4.SelectedIndex
 
-        If valor < NUDcicd.Value Then
+        If valor < NUDcidr.Value Then
             CBMascaraSub1.SelectedIndex = CBMascara1.SelectedIndex
             Return
         End If
@@ -428,7 +500,7 @@
         CBMascaraSub4.Enabled = False
         CBMascaraSub4.SelectedIndex = 0
 
-        NUDCICDSub.Value = valor
+        NUDCIDRSub.Value = valor
 
     End Sub
 
@@ -438,7 +510,7 @@
 
         valor = CBMascaraSub1.SelectedIndex + CBMascaraSub2.SelectedIndex + CBMascaraSub3.SelectedIndex + CBMascaraSub4.SelectedIndex
 
-        If valor < NUDcicd.Value Then
+        If valor < NUDcidr.Value Then
             CBMascaraSub2.SelectedIndex = CBMascara2.SelectedIndex
             Return
         End If
@@ -449,7 +521,7 @@
         CBMascaraSub4.Enabled = False
         CBMascaraSub4.SelectedIndex = 0
 
-        NUDCICDSub.Value = valor
+        NUDCIDRSub.Value = valor
 
     End Sub
 
@@ -459,7 +531,7 @@
 
         valor = CBMascaraSub1.SelectedIndex + CBMascaraSub2.SelectedIndex + CBMascaraSub3.SelectedIndex + CBMascaraSub4.SelectedIndex
 
-        If valor < NUDcicd.Value Then
+        If valor < NUDcidr.Value Then
             CBMascaraSub3.SelectedIndex = CBMascara3.SelectedIndex
             Return
         End If
@@ -468,7 +540,7 @@
 
         CBMascaraSub4.SelectedIndex = 0
 
-        NUDCICDSub.Value = valor
+        NUDCIDRSub.Value = valor
 
     End Sub
 
@@ -478,12 +550,12 @@
 
         valor = CBMascaraSub1.SelectedIndex + CBMascaraSub2.SelectedIndex + CBMascaraSub3.SelectedIndex + CBMascaraSub4.SelectedIndex
 
-        If valor < NUDcicd.Value Then
+        If valor < NUDcidr.Value Then
             CBMascaraSub4.SelectedIndex = CBMascara4.SelectedIndex
             Return
         End If
 
-        NUDCICDSub.Value = valor
+        NUDCIDRSub.Value = valor
 
     End Sub
 
