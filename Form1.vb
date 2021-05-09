@@ -1,10 +1,16 @@
-﻿Public Class Form1
+﻿Imports System.IO
+Imports System.Xml
+
+Public Class Form1
+
+
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
 
         RBClaseA.Checked = True
         RBMascara.Checked = True
         RBMascaraSub.Checked = True
+        PnlSubred.Visible = False
 
         Dim Ott As New ToolTip
 
@@ -57,13 +63,13 @@
         Ott.SetToolTip(LblMascaraRed, "Elección de la máscara de red")
         Ott.SetToolTip(LblMascaraSubred, "Elección de la máscara de subred")
 
-        Ott.SetToolTip(LblDirBroadcast, "Dirección broadcast de la red")
+        Ott.SetToolTip(LblDirBroadcast, "Dirección de difusión de la red")
         Ott.SetToolTip(LblDirPrimera, "Primera dirección útil de la red")
         Ott.SetToolTip(LblDirRed, "Dirección de la red")
         Ott.SetToolTip(LblDirUltima, "Última dirección útil de la red")
         Ott.SetToolTip(LblNuDir, "Número de direcciones que tiene la red")
         Ott.SetToolTip(LblNuHosts, "Número de Equipos que puede haber en la red")
-
+        Ott.SetToolTip(DGVSubRedes, "Tabla donde se mostrarán los datos de las subredes")
 
 
     End Sub
@@ -78,50 +84,44 @@
 
         Dim red As UInteger
         Dim mascara As UInteger
-        Dim primeraDireccion As UInteger
-        Dim ultimaDireccion As UInteger
-        Dim cantidad As UInteger
-        Dim listaBytes As Byte()
-        Dim i As Integer
+        Dim mascara_Subred As UInteger
+        Dim listaDatos As String()
+        Dim i As UInteger
+        Dim salto As UInteger
+        Dim final As UInteger
 
         mascara = 0
-        For i = 31 To 32 - NUDcidr.Value Step -1
+        For i = 32 - NUDcidr.Value To 31
             mascara = mascara + 2 ^ i
+        Next i
+
+        mascara_Subred = 0
+        For i = 32 - NUDCIDRSub.Value To 31
+            mascara_Subred = mascara_Subred + 2 ^ i
         Next i
 
         red = (((NUDRed1.Value * 256) + NUDRed2.Value) * 256 + NUDRed3.Value) * 256 + NUDRed4.Value
 
-        red = red And mascara
+        listaDatos = Calculo_Red(red, mascara)
 
-        cantidad = 2 ^ (32 - NUDcidr.Value)
+        TBRed.Text = listaDatos(0)
+        TBBroadcast.Text = listaDatos(1)
+        TBDireccionPrimera.Text = listaDatos(2)
+        TBDireccionUltima.Text = listaDatos(3)
+        TBCantidadDirecciones.Text = listaDatos(4)
+        TBNumeroEquipos.Text = listaDatos(5)
 
-        primeraDireccion = red + 1
-        ultimaDireccion = red + cantidad - 1
-
-        listaBytes = BitConverter.GetBytes(red)
-        TBRed.Text = listaBytes(3).ToString + "." + listaBytes(2).ToString + "." +
-                                 listaBytes(1).ToString + "." + listaBytes(0).ToString
-
-        listaBytes = BitConverter.GetBytes(mascara)
-        TBBroadcast.Text = listaBytes(3).ToString + "." + listaBytes(2).ToString + "." +
-                                 listaBytes(1).ToString + "." + listaBytes(0).ToString
-
-        listaBytes = BitConverter.GetBytes(primeraDireccion)
-        TBDireccionPrimera.Text = listaBytes(3).ToString + "." + listaBytes(2).ToString + "." +
-                                  listaBytes(1).ToString + "." + listaBytes(0).ToString
-
-        listaBytes = BitConverter.GetBytes(ultimaDireccion)
-        TBDireccionUltima.Text = listaBytes(3).ToString + "." + listaBytes(2).ToString + "." +
-                                 listaBytes(1).ToString + "." + listaBytes(0).ToString
-
-
-        If NUDcidr.Value = 32 Then
-            TBCantidadDirecciones.Text = 0
-            TBNumeroEquipos.Text = 0
-        Else
-            TBCantidadDirecciones.Text = cantidad
-            TBNumeroEquipos.Text = cantidad - 2
+        If mascara < mascara_Subred Then
+            salto = 2 ^ (32 - NUDCIDRSub.Value)
+            final = red Or (Not mascara)
+            i = red
+            Do
+                listaDatos = Calculo_Red(i, mascara_Subred)
+                DGVSubRedes.Rows.Add(listaDatos)
+                i = i + salto
+            Loop While i < final
         End If
+
 
 
     End Sub
@@ -145,6 +145,112 @@
         RBMascarasub_CheckedChanged(sender, e)
 
     End Sub
+
+    Private Sub BtnCargar_Click(sender As Object, e As EventArgs) Handles BtnCargar.Click
+
+        Dim Documento As New XmlDocument
+        Dim ele As XmlElement
+
+        Dim direcciones As String()
+        Dim mascaras As String()
+        Dim mascarasSubred As String()
+
+        Dim nombre_archivo As String
+        Dim oFichero As New OpenFileDialog
+        Dim oResultado As DialogResult
+        oFichero.Filter = ".archivos de datos | *.xml"
+        oFichero.Title = "Elección fichero a guardar"
+        oResultado = oFichero.ShowDialog()
+
+        If oResultado <> DialogResult.OK Then Return
+
+        nombre_archivo = oFichero.FileName
+
+        If File.Exists(nombre_archivo) = False Then
+            MsgBox("Archivo seleccionado no existe")
+            Return
+        End If
+
+        Documento.Load(nombre_archivo)
+
+        ele = Documento.LastChild
+
+        NUDcidr.Value = Convert.ToDecimal(ele.SelectSingleNode("cidr").InnerText)
+
+        NUDCIDRSub.Value = Convert.ToDecimal(ele.SelectSingleNode("cidrSubRed").InnerText)
+        direcciones = ele.SelectSingleNode("direccion").InnerText.Split(".")
+        mascaras = ele.SelectSingleNode("mascara").InnerText.Split(".")
+        mascarasSubred = ele.SelectSingleNode("mascaraSubRed").InnerText.Split(".")
+
+
+
+    End Sub
+
+    Private Sub BtnGuardar_Click(sender As Object, e As EventArgs) Handles BtnGuardar.Click
+
+        Dim Documento As New XmlDocument
+        Dim red, direccion, mascara, cidr, mascaraSubRed, cidrSubRed As XmlElement
+        Dim direccion_Texto, mascara_Texto, cidr_Texto, mascaraSubRed_Texto, cidrSubRed_Texto As XmlText
+        Dim nombre_archivo As String
+        Dim oFichero As New SaveFileDialog
+        Dim oResultado As DialogResult
+
+        oFichero.Filter = ".archivos de datos | *.xml"
+        oFichero.Title = "Elección fichero a guardar"
+        oResultado = oFichero.ShowDialog()
+
+        If oResultado <> DialogResult.OK Then Return
+
+        nombre_archivo = oFichero.FileName
+
+
+
+        Documento.LoadXml("<redes></redes>")
+
+        red = Documento.CreateElement("Red")
+
+        direccion = Documento.CreateElement("direccion")
+        direccion_Texto = Documento.CreateTextNode(NUDRed1.Value.ToString + "." +
+                                      NUDRed2.Value.ToString + "." +
+                                      NUDRed3.Value.ToString + "." +
+                                      NUDRed4.Value.ToString)
+        direccion.AppendChild(direccion_Texto)
+        red.AppendChild(direccion)
+
+        mascara = Documento.CreateElement("mascara")
+        mascara_Texto = Documento.CreateTextNode(CBMascara1.SelectedItem.ToString + "." +
+                                      CBMascara2.SelectedItem.ToString + "." +
+                                      CBMascara3.SelectedItem.ToString + "." +
+                                      CBMascara4.SelectedItem.ToString)
+        mascara.AppendChild(mascara_Texto)
+        red.AppendChild(mascara)
+
+        cidr = Documento.CreateElement("cidr")
+        cidr_Texto = Documento.CreateTextNode(NUDcidr.Value.ToString)
+        cidr.AppendChild(cidr_Texto)
+        red.AppendChild(cidr)
+
+        mascaraSubRed = Documento.CreateElement("mascaraSubRed")
+        mascaraSubRed_Texto = Documento.CreateTextNode(CBMascaraSub1.SelectedItem.ToString + "." +
+                                      CBMascaraSub1.SelectedItem.ToString + "." +
+                                      CBMascaraSub1.SelectedItem.ToString + "." +
+                                      CBMascaraSub1.SelectedItem.ToString)
+        mascaraSubRed.AppendChild(mascaraSubRed_Texto)
+
+        red.AppendChild(mascaraSubRed)
+
+        cidrSubRed = Documento.CreateElement("cidrSubRed")
+        cidrSubRed_Texto = Documento.CreateTextNode(NUDcidr.Value.ToString)
+        cidrSubRed.AppendChild(cidrSubRed_Texto)
+        red.AppendChild(cidrSubRed)
+
+        Documento.DocumentElement.AppendChild(red)
+
+        Documento.Save(nombre_archivo)
+
+
+    End Sub
+
 
     ' --------------------------------------------------------------------------------------------------------------
     ' --------------------------------------------------------------------------------------------------------------
@@ -404,6 +510,14 @@
     ' --------------------------------------------------------------------------------------------------------------
 
 
+
+    Private Sub RBSubredes_CheckedChanged(sender As Object, e As EventArgs) Handles RBNoSubredes.CheckedChanged, RBSiSubredes.CheckedChanged
+
+        If RBSiSubredes.Checked = True Then PnlSubred.Visible = True Else PnlSubred.Visible = False
+
+    End Sub
+
+
     Private Sub RBcidrSub_CheckedChanged(sender As Object, e As EventArgs) Handles RBCIDRSub.CheckedChanged
 
         If RBCIDRSub.Checked = True Then
@@ -558,5 +672,43 @@
         NUDCIDRSub.Value = valor
 
     End Sub
+
+    Private Function Calculo_Red(pRed As UInt32, pMascara As UInt32) As String()
+        Dim Resultados As New List(Of String)
+        Dim dir_Red As UInt32
+        Dim dir_Difusion As UInt32
+        Dim dir_A As UInt32
+        Dim dir_B As UInt32
+        Dim nu_dir As UInt32
+        Dim nu_hosts As UInt32
+        Dim octetos As Byte()
+
+        dir_Red = pRed And pMascara
+        dir_Difusion = pRed Or (Not pMascara)
+        dir_A = dir_Red + 1
+        dir_B = dir_Difusion - 1
+
+        nu_dir = dir_Difusion - dir_Red
+        nu_hosts = dir_B - dir_A
+
+        Resultados.Clear()
+
+        octetos = BitConverter.GetBytes(dir_Red)
+        Resultados.Add(octetos(3).ToString + "." + octetos(2).ToString + "." + octetos(1).ToString + "." + octetos(0).ToString)
+
+        octetos = BitConverter.GetBytes(dir_Difusion)
+        Resultados.Add(octetos(3).ToString + "." + octetos(2).ToString + "." + octetos(1).ToString + "." + octetos(0).ToString)
+
+        octetos = BitConverter.GetBytes(dir_A)
+        Resultados.Add(octetos(3).ToString + "." + octetos(2).ToString + "." + octetos(1).ToString + "." + octetos(0).ToString)
+
+        octetos = BitConverter.GetBytes(dir_B)
+        Resultados.Add(octetos(3).ToString + "." + octetos(2).ToString + "." + octetos(1).ToString + "." + octetos(0).ToString)
+
+        Resultados.Add(nu_dir.ToString)
+        Resultados.Add(nu_hosts.ToString)
+
+        Return Resultados.ToArray
+    End Function
 
 End Class
