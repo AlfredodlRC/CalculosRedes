@@ -73,9 +73,10 @@ Partial Class Form1
         Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GBSubredes = New System.Windows.Forms.GroupBox()
+        Me.RBSiSubredes = New System.Windows.Forms.RadioButton()
         Me.RBNoSubredes = New System.Windows.Forms.RadioButton()
         Me.PnlSubred = New System.Windows.Forms.Panel()
-        Me.RBSiSubredes = New System.Windows.Forms.RadioButton()
+        Me.TVDirecciones = New System.Windows.Forms.TreeView()
         CType(Me.NUDRed1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NUDRed2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.NUDRed3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -367,6 +368,7 @@ Partial Class Form1
         Me.TBRed.ReadOnly = True
         Me.TBRed.Size = New System.Drawing.Size(125, 27)
         Me.TBRed.TabIndex = 25
+        Me.TBRed.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'TBBroadcast
         '
@@ -376,6 +378,7 @@ Partial Class Form1
         Me.TBBroadcast.ReadOnly = True
         Me.TBBroadcast.Size = New System.Drawing.Size(125, 27)
         Me.TBBroadcast.TabIndex = 26
+        Me.TBBroadcast.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'TBDireccionUltima
         '
@@ -385,6 +388,7 @@ Partial Class Form1
         Me.TBDireccionUltima.ReadOnly = True
         Me.TBDireccionUltima.Size = New System.Drawing.Size(125, 27)
         Me.TBDireccionUltima.TabIndex = 28
+        Me.TBDireccionUltima.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'TBDireccionPrimera
         '
@@ -394,6 +398,7 @@ Partial Class Form1
         Me.TBDireccionPrimera.ReadOnly = True
         Me.TBDireccionPrimera.Size = New System.Drawing.Size(125, 27)
         Me.TBDireccionPrimera.TabIndex = 27
+        Me.TBDireccionPrimera.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'TBCantidadDirecciones
         '
@@ -403,6 +408,7 @@ Partial Class Form1
         Me.TBCantidadDirecciones.ReadOnly = True
         Me.TBCantidadDirecciones.Size = New System.Drawing.Size(125, 27)
         Me.TBCantidadDirecciones.TabIndex = 30
+        Me.TBCantidadDirecciones.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'TBNumeroEquipos
         '
@@ -412,6 +418,7 @@ Partial Class Form1
         Me.TBNumeroEquipos.ReadOnly = True
         Me.TBNumeroEquipos.Size = New System.Drawing.Size(125, 27)
         Me.TBNumeroEquipos.TabIndex = 29
+        Me.TBNumeroEquipos.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'LblMascaraSubred
         '
@@ -601,6 +608,17 @@ Partial Class Form1
         Me.GBSubredes.TabStop = False
         Me.GBSubredes.Text = "Subredes"
         '
+        'RBSiSubredes
+        '
+        Me.RBSiSubredes.AutoSize = True
+        Me.RBSiSubredes.Location = New System.Drawing.Point(59, 25)
+        Me.RBSiSubredes.Name = "RBSiSubredes"
+        Me.RBSiSubredes.Size = New System.Drawing.Size(42, 24)
+        Me.RBSiSubredes.TabIndex = 1
+        Me.RBSiSubredes.TabStop = True
+        Me.RBSiSubredes.Text = "Si"
+        Me.RBSiSubredes.UseVisualStyleBackColor = True
+        '
         'RBNoSubredes
         '
         Me.RBNoSubredes.AutoSize = True
@@ -627,23 +645,22 @@ Partial Class Form1
         Me.PnlSubred.Size = New System.Drawing.Size(845, 81)
         Me.PnlSubred.TabIndex = 43
         '
-        'RBSiSubredes
+        'TVDirecciones
         '
-        Me.RBSiSubredes.AutoSize = True
-        Me.RBSiSubredes.Location = New System.Drawing.Point(59, 25)
-        Me.RBSiSubredes.Name = "RBSiSubredes"
-        Me.RBSiSubredes.Size = New System.Drawing.Size(42, 24)
-        Me.RBSiSubredes.TabIndex = 1
-        Me.RBSiSubredes.TabStop = True
-        Me.RBSiSubredes.Text = "Si"
-        Me.RBSiSubredes.UseVisualStyleBackColor = True
+        Me.TVDirecciones.BackColor = System.Drawing.Color.BurlyWood
+        Me.TVDirecciones.Location = New System.Drawing.Point(861, 20)
+        Me.TVDirecciones.Name = "TVDirecciones"
+        Me.TVDirecciones.Size = New System.Drawing.Size(263, 511)
+        Me.TVDirecciones.TabIndex = 44
         '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.BackColor = System.Drawing.Color.MediumAquamarine
-        Me.ClientSize = New System.Drawing.Size(851, 543)
+        Me.ClientSize = New System.Drawing.Size(1136, 543)
+        Me.Controls.Add(Me.TVDirecciones)
         Me.Controls.Add(Me.PnlSubred)
         Me.Controls.Add(Me.GBSubredes)
         Me.Controls.Add(Me.DGVSubRedes)
@@ -677,6 +694,7 @@ Partial Class Form1
         Me.Controls.Add(Me.NUDRed3)
         Me.Controls.Add(Me.NUDRed2)
         Me.Controls.Add(Me.NUDRed1)
+        Me.MaximizeBox = False
         Me.Name = "Form1"
         Me.Text = "Calculo redes"
         CType(Me.NUDRed1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -755,4 +773,5 @@ Partial Class Form1
     Friend WithEvents RBNoSubredes As RadioButton
     Friend WithEvents PnlSubred As Panel
     Friend WithEvents RBSiSubredes As RadioButton
+    Friend WithEvents TVDirecciones As TreeView
 End Class
